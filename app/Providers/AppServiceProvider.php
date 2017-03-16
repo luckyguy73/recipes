@@ -15,9 +15,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
-        view()->composer('layouts.partials.sidebar', function($view) {
+        view()->composer(['layouts.partials.sidebar', 'posts.create'], function($view) {
             $view->with('archives', \App\Post::archives());
-            $view->with('tags', \App\Tag::has('posts')->pluck('name'));
+            $view->with('tags', \App\Tag::all());
         });
     }
 

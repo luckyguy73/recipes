@@ -41,17 +41,19 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->tag);
         $this->validate($request, [
             'title' => 'required|unique:posts|max:255',
-            'body' => 'required|min:5',
+            'ingredients' => 'required|min:5',
+            'directions' => 'required|min:5',
         ]);
-
         Post::create([
             'title' => request('title'),
-            'body' => request('body'),
+            'ingredients' => request('ingredients'),
+            'directions' => request('directions'),
             'slug' => str_slug($request->title, '-'),
             'user_id' => auth()->id()
-        ]);
+        ])->tags()->attach($request->tag);
         
         session()->flash('success', 'Blog has been published');
         return redirect()->route('posts.index');

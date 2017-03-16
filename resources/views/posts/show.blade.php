@@ -7,7 +7,12 @@
 				<h1>{{ ucwords($post->title) }}</h1>
 			</div>
 			<div class="panel-body">
-				{!! nl2br(e($post->body)) !!}
+				<h3>Ingredients</h3>
+				{!! nl2br(e($post->ingredients)) !!}
+			</div>
+			<div class="panel-body">
+				<h3>Directions</h3>
+				{!! nl2br(e($post->directions)) !!}
 			</div>
 			<div class="panel-footer">
 				<small class="text-danger">{{ $post->created_at->diffForHumans() }} by <a href="#">{{ $post->user->name }}</a></small>
