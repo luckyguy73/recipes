@@ -16,7 +16,7 @@ class TagController extends Controller
      */
     public function index(Tag $tag)
     {
-        $posts = $tag->posts()->paginate(5);
+        $posts = $tag->posts()->latest()->paginate(5);
         return view('posts.index', compact('posts'));
     }
 
