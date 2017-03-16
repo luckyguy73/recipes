@@ -47,8 +47,9 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        $data['email'] = strtolower($data['email']);
         return Validator::make($data, [
-            'name' => 'required|max:255',
+            'name' => ['required', 'regex:/^[a-zA-Z]+(( |-)[a-zA-Z]+)*$/', 'max:100'],
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
         ]);
@@ -62,10 +63,23 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $data['name'] = $this->clean($data['name']);
+        $data['email'] = strtolower($data['email']);
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+    protected function clean($name) 
+    {
+        if(strpos($name, '-')) {
+            $array = explode('-',$name);
+            $string = str_replace(' ', '-', ucwords(strtolower(implode(' ', $array))));
+            return $string;
+        } else {
+            $string = ucwords(strtolower($name));
+            return $string;
+        } 
     }
 }

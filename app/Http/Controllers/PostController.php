@@ -41,7 +41,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->tag);
+        $request['title'] = strtolower(request('title'));
         $this->validate($request, [
             'title' => 'required|unique:posts|max:255',
             'ingredients' => 'required|min:5',
@@ -55,7 +55,7 @@ class PostController extends Controller
             'user_id' => auth()->id()
         ])->tags()->attach($request->tag);
         
-        session()->flash('success', 'Blog has been published');
+        session()->flash('success', 'Recipe has been published');
         return redirect()->route('posts.index');
     }
 
