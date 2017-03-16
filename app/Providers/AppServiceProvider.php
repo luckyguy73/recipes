@@ -17,7 +17,7 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
         view()->composer(['layouts.partials.sidebar', 'posts.create'], function($view) {
             $view->with('archives', \App\Post::archives());
-            $view->with('tags', \App\Tag::all());
+            $view->with('tags', \App\Tag::orderBy('name', 'asc')->get());
         });
     }
 
