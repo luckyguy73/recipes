@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Post;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 
 class PostController extends Controller
 {
@@ -46,13 +47,16 @@ class PostController extends Controller
             'title' => 'required|unique:posts|max:255',
             'ingredients' => 'required|min:5',
             'directions' => 'required|min:5',
+            'image' => 'file|max:40000|mimes:jpeg,gif,png,svg,bmp',
         ]);
+        $image = $request->file('image')->store('images');
         Post::create([
             'title' => request('title'),
             'ingredients' => request('ingredients'),
             'directions' => request('directions'),
             'slug' => str_slug($request->title, '-'),
-            'user_id' => auth()->id()
+            'user_id' => auth()->id(),
+            'image' => $image,
         ])->tags()->attach($request->tag);
         
         session()->flash('success', 'Recipe has been published');

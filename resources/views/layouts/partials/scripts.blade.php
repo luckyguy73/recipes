@@ -13,5 +13,9 @@
 				$(this).prop('checked', false);
 			}
 		});
+        $('#uploadBtn').change(function() {
+            // document.getElementById("uploadFile").value = this.files[0].name;
+            $('#uploadFile').val(this.files[0].name);
+        });
     });
 </script>
