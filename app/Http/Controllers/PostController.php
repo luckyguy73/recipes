@@ -20,7 +20,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::latest()->filter(request(['month', 'year']))->paginate(5);
+        $posts = Post::latest()->filter(request(['month', 'year']))->paginate(10);
         return view('posts.index', compact('posts'));
     }
 
@@ -49,14 +49,14 @@ class PostController extends Controller
             'directions' => 'required|min:5',
             'image' => 'file|max:40000|mimes:jpeg,gif,png,svg,bmp',
         ]);
-        $image = $request->file('image')->store('images');
+        $path = $request->file('image')->store(auth()->id(), 's3');
         Post::create([
             'title' => request('title'),
             'ingredients' => request('ingredients'),
             'directions' => request('directions'),
             'slug' => str_slug($request->title, '-'),
             'user_id' => auth()->id(),
-            'image' => $image,
+            'image' => $path,
         ])->tags()->attach($request->tag);
         
         session()->flash('success', 'Recipe has been published');

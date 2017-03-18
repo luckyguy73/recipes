@@ -4,9 +4,11 @@
 	<div class="col-sm-8 blog-main">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<h1>{{ ucwords($post->title) }}</h1>
+				<h1 class="text-center">{{ ucwords($post->title) }}</h1>
 			</div>
 			<div class="panel-body">
+				<img src="{{ Storage::disk('s3')->url($post->image) }}" class="img-responsive center-block">
+				<br>
 				<h3>Ingredients</h3>
 				{!! nl2br(e($post->ingredients)) !!}
 			</div>
