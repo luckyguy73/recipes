@@ -11198,7 +11198,7 @@ module.exports = g;
     $('#uploadBtn').change(function () {
         $('#uploadFile').val(this.files[0].name);
     });
-    $('button.btn.btn-danger').click(function (e) {
+    $('#deleteBtn').click(function (e) {
         e.preventDefault();
         swal({
             title: "Please confirm!",
@@ -11211,7 +11211,7 @@ module.exports = g;
             closeOnCancel: false
         }, function (isConfirm) {
             if (isConfirm) {
-                $('form').submit();
+                $('.deleteForm').submit();
             }
         });
     });

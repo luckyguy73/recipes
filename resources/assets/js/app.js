@@ -14,7 +14,7 @@ $(document).ready(function(){
         $('#uploadBtn').change(function() {
             $('#uploadFile').val(this.files[0].name);
         });
-        $('button.btn.btn-danger').click(function( e ) {
+        $('#deleteBtn').click(function( e ) {
             e.preventDefault();
             swal({
                 title: "Please confirm!",
@@ -28,7 +28,7 @@ $(document).ready(function(){
             },
             function(isConfirm) {
                 if (isConfirm) {
-                    $('form').submit();
+                    $('.deleteForm').submit();
                 }
             });
         }); 

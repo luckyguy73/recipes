@@ -8,7 +8,7 @@
 				@if (Auth::check())
 					@if (Auth::user()->id == $post->user_id)
 						<a href="{{ route('posts.edit', [$post]) }}"><button class="btn btn-success">Edit Recipe</button></a>
-						<a href="#"><button class="btn btn-danger">Delete Recipe</button></a>
+						<a href="#"><button id="deleteBtn" class="btn btn-danger">Delete Recipe</button></a>
 					@endif
 				@endif
 			</div>
@@ -61,7 +61,7 @@
 			@endforeach
 		</ul>
 	</div><!-- /.blog-main -->	
-	<form action="{{ route('posts.destroy', [$post]) }}" method="post" id="delete-post-{{ $post->id }}">
+	<form action="{{ route('posts.destroy', [$post]) }}" method="post" class="deleteForm" id="delete-post-{{ $post->id }}">
         {{ csrf_field() }}
         {{ method_field('delete') }}
     </form>

@@ -6,6 +6,13 @@
           <a class="blog-nav-item" href="{{ url('/') }}">Home</a>
           <a class="blog-nav-item" href="{{ route('posts.index') }} ">All Posts</a>
           <a class="blog-nav-item" href="{{ route('posts.create') }} ">New Post</a>
+          <form class="navbar-form navbar-right" action="/search" method="post">
+            {{ csrf_field() }}
+            <div class="form-group">
+              <input type="text" name="search" class="form-control" placeholder="Search">
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+          </form>
             @if (Auth::check())
                 <span class="dropdown navbar-right">
                   <a class="blog-nav-item navbar-right" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->name }} 
