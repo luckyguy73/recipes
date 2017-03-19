@@ -56,7 +56,7 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'support@belle-moda.herokuapp.com'),
+        'address' => env('MAIL_FROM_ADDRESS', 'no-reply@belle-moda.herokuapp.com'),
         'name' => env('MAIL_FROM_NAME', 'Belle Moda Support Team'),
     ],
 
