@@ -12,7 +12,7 @@
         ]) !!};
     </script>
     
-	<title>Delish Recipes</title>
+	<title>Delish Recipes | Belle Moda</title>
 
 	<!-- Custom styles for this template -->
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">

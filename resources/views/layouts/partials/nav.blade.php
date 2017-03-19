@@ -2,7 +2,7 @@
     <div class="blog-masthead">
       <div class="container">
         <nav class="blog-nav">
-        <a class="navbar-brand" href="#"><img id="bm-img" src="favicon.ico" alt="belle moda"></a>
+        <a class="navbar-brand" href="#"><img id="bm-img" src="/favicon.ico" alt="belle moda"></a>
           <a class="blog-nav-item" href="{{ url('/') }}">Home</a>
           <a class="blog-nav-item" href="{{ route('posts.index') }} ">All Posts</a>
           <a class="blog-nav-item" href="{{ route('posts.create') }} ">New Post</a>
