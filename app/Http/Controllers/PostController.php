@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Post;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Alert;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -31,6 +34,7 @@ class PostController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Post::class);
         return view('posts.create');
     }
 
@@ -44,12 +48,12 @@ class PostController extends Controller
     {
         $request['title'] = strtolower(request('title'));
         $this->validate($request, [
-            'title' => 'required|unique:posts|max:255',
-            'ingredients' => 'required|min:5',
-            'directions' => 'required|min:5',
+            'title' => 'required|unique:posts|max:100',
+            'ingredients' => 'required',
+            'directions' => 'required',
             'image' => 'file|max:40000|mimes:jpeg,gif,png,svg,bmp',
         ]);
-        $path = $request->file('image')->store(auth()->id(), 's3');
+        $path = empty(request('image')) ? null : $request->file('image')->store(auth()->id(), 's3');
         Post::create([
             'title' => request('title'),
             'ingredients' => request('ingredients'),
@@ -58,8 +62,8 @@ class PostController extends Controller
             'user_id' => auth()->id(),
             'image' => $path,
         ])->tags()->attach($request->tag);
-        
-        session()->flash('success', 'Recipe has been published');
+        Alert::success('Recipe has been published');
+        // session()->flash('success', 'Recipe has been published');
         return redirect()->route('posts.index');
     }
 
@@ -82,7 +86,8 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        $this->authorize('edit', $post);
+        return view('posts.edit', compact('post'));
     }
 
     /**
@@ -94,7 +99,37 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        $this->authorize('update', $post);
+        $request['title'] = strtolower(request('title'));
+        $this->validate($request, [
+            'title' => [
+                'required',
+                Rule::unique('posts')->ignore($post->id),
+                'max:100',
+            ],
+            'ingredients' => 'required',
+            'directions' => 'required',
+            'image' => 'file|max:40000|mimes:jpeg,gif,png,svg,bmp',
+        ]);
+        if (!empty(request('image'))) {
+            if(!is_null($post->image)) {
+                $file = $post->image;
+                Storage::disk('s3')->delete($file);
+            }
+            $path = $request->file('image')->store(auth()->id(), 's3');
+            $post->image = $path;
+        }
+            $post->title = request('title');
+            $post->ingredients = request('ingredients');
+            $post->directions = request('directions');
+            $post->slug = str_slug($request->title, '-');
+            $post->tags()->detach();
+            $post->tags()->attach($request->tag);
+            $post->save();
+
+        Alert::success('Recipe successfully updated');      
+        // session()->flash('success', 'Recipe updates successful');
+        return redirect()->route('posts.index');
     }
 
     /**
@@ -105,6 +140,9 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $this->authorize('delete', $post);
+        $post->delete();
+        Alert::success('Recipe successfully deleted');  
+        return redirect()->route('posts.index');
     }
 }

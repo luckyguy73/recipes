@@ -1,24 +1,25 @@
 @extends('layouts.master')
 @section('content')
 	<div class="col-sm-8">
-	<h1>Post a Recipe</h1>
-		<form action="{{ route('posts.store') }}" method="post" enctype="multipart/form-data">
+	<h1>Edit Recipe</h1>
+		<form action="{{ route('posts.update', [$post]) }}" method="post" enctype="multipart/form-data">
 			{{ csrf_field() }}		
+			{{ method_field('PATCH') }}
 			<div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
 				<label for="title" class="control-label">Recipe Title</label>
-				<input type="text" name="title" id="title" class="form-control" placeholder="Enter recipe title" value="{{ old('title') }}">
+				<input type="text" name="title" id="title" class="form-control" placeholder="Enter recipe title" value="{{ $post->title }}">
 			</div>
 			<div class="row">
 				<div class="col-sm-6">
 					<div class="form-group{{ $errors->has('ingredients') ? ' has-error' : '' }}">
 						<label for="ingredients" class="control-label">Ingredients</label>
-						<textarea name="ingredients" id="ingredients" cols="20" rows="15" class="form-control" placeholder="Enter ingredients">{{ old('ingredients') }}</textarea>
+						<textarea name="ingredients" id="ingredients" cols="20" rows="15" class="form-control" placeholder="Enter ingredients">{{ $post->ingredients }}</textarea>
 					</div>
 				</div>
 				<div class="col-sm-6">
 					<div class="form-group{{ $errors->has('directions') ? ' has-error' : '' }}">
 						<label for="directions" class="control-label">Directions</label>
-						<textarea name="directions" id="directions" cols="20" rows="15" class="form-control" placeholder="Enter directions">{{ old('directions') }}</textarea>
+						<textarea name="directions" id="directions" cols="20" rows="15" class="form-control" placeholder="Enter directions">{{ $post->directions }}</textarea>
 					</div>
 				</div>
 			</div>
@@ -29,9 +30,11 @@
 						@foreach($tags as $tag)
 							<div class="col-sm-3">
 								<input type="checkbox" name="tag[{{$tag->name}}]" value="{{ $tag->id }}"
-									@if(array_key_exists($tag->name, old('tag', [])))
-										checked
-									@endif 
+									@foreach ($post->tags as $ptag)
+										@if($tag->name == $ptag->name)
+											checked
+										@endif 
+									@endforeach
 								>{{ $tag->name }}
 							</div>
 						@endforeach
@@ -43,9 +46,10 @@
 				    <span>Browse</span>
 				    <input id="uploadBtn" type="file" name="image" class="upload" title="Browse">
 				</div>
+				<span class="help-block">Skip this unless you want to change existing image</span>
 			</div>
 			<div class="form-group">
-				<input type="submit" class="btn btn-primary">
+				<input type="submit" class="btn btn-primary" value="Edit Recipe">
 			</div>
 		</form>
 	</div>

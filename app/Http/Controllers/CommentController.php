@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Post;
 use App\Comment;
 use Illuminate\Http\Request;
+use Alert;
 
 class CommentController extends Controller
 {
@@ -44,7 +45,7 @@ class CommentController extends Controller
             'user_id' => auth()->id(),
             'post_id' => $post->id,
         ]);
-        session()->flash('success', 'Comment has been added');
+        Alert::success('Comment has been posted');
         return back();
     }
 

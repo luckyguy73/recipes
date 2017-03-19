@@ -3,11 +3,15 @@
 @section('content')
 	<div class="col-sm-8 blog-main">
 		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h1 class="text-center">{{ ucwords($post->title) }}</h1>
+			<div class="panel-heading text-center">
+				<h1>{{ ucwords($post->title) }}</h1>
+				<a href="{{ route('posts.edit', [$post]) }}"><button class="btn btn-success">Edit Recipe</button></a>
+				<a href="#"><button class="btn btn-danger">Delete Recipe</button></a>
 			</div>
 			<div class="panel-body">
-				<img src="{{ Storage::disk('s3')->url($post->image) }}" class="img-responsive center-block">
+				@if (!is_null($post->image))
+					<img src="{{ Storage::disk('s3')->url($post->image) }}" class="img-responsive center-block">
+				@endif
 				<br>
 				<h3>Ingredients</h3>
 				{!! nl2br(e($post->ingredients)) !!}
@@ -17,7 +21,7 @@
 				{!! nl2br(e($post->directions)) !!}
 			</div>
 			<div class="panel-footer">
-				<small class="text-danger">{{ $post->created_at->diffForHumans() }} by <a href="#">{{ $post->user->name }}</a></small>
+				<small class="text-success">{{ $post->created_at->diffForHumans() }} by <a href="#">{{ $post->user->name }}</a></small>
 				@if(count($post->tags))
 					<br>
 					<ul class="list-inline">
@@ -53,4 +57,8 @@
 			@endforeach
 		</ul>
 	</div><!-- /.blog-main -->	
+	<form action="{{ route('posts.destroy', [$post]) }}" method="post" id="delete-post-{{ $post->id }}">
+        {{ csrf_field() }}
+        {{ method_field('delete') }}
+    </form>
 @stop

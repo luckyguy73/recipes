@@ -11,9 +11,11 @@
             'csrfToken' => csrf_token(),
         ]) !!};
     </script>
+    
 	<title>Delish Recipes</title>
 
 	<!-- Custom styles for this template -->
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 	<link href="{{ mix('/css/app.css') }}" rel="stylesheet">
+	<link href="{{ mix('/css/sweetalert.css') }}" rel="stylesheet">
 </head>

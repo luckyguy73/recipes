@@ -20,7 +20,7 @@ class CreatePostsTable extends Migration
             $table->string('slug');
             $table->text('ingredients');
             $table->text('directions');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+    <link href="{{ mix('/css/sweetalert.css') }}" rel="stylesheet">
 
     <!-- Scripts -->
     <script>
@@ -83,5 +84,7 @@
 
     <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}"></script>
+    <script src="{{ mix('js/sweetalert.min.js') }}"></script>
+    @include('sweet::alert')
 </body>
 </html>

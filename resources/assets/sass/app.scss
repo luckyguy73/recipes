@@ -7,6 +7,9 @@
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
+// SweetAlert
+@import "sweetalert";
+
 /*
  * Globals
  */
@@ -205,4 +208,11 @@ h6, .h6 {
     cursor: pointer;
     opacity: 0;
     filter: alpha(opacity=0);
+}
+.vertical-center {
+  min-height: 100% - 10;  /* Fallback for browsers do NOT support vh unit */
+  min-height: 100vh - 10; /* These two lines are counted as one :-)       */
+
+  display: flex;
+  align-items: center;
 }
