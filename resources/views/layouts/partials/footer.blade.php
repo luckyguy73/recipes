@@ -1,5 +1,7 @@
     <footer class="blog-footer">
-      <p>Blog template built for <a href="http://getbootstrap.com">Bootstrap</a> by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+      <h3>Contact</h3>
+        <p>I can be found on <a href="http://github.com/luckyguy73" target="_blank">github</a> or you can <a href="mailto:luckyguy73@yahoo.com" target="_blank">email me.</a></p>
+        <p class="center pink">&copy; 2010<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Belle Moda</p>
       
       <button id="scroll-btn" class="btn btn-default">Back to Top</button>
     </footer>
