@@ -5,8 +5,12 @@
 		<div class="panel panel-default">
 			<div class="panel-heading text-center">
 				<h1>{{ ucwords($post->title) }}</h1>
-				<a href="{{ route('posts.edit', [$post]) }}"><button class="btn btn-success">Edit Recipe</button></a>
-				<a href="#"><button class="btn btn-danger">Delete Recipe</button></a>
+				@if (Auth::check())
+					@if (Auth::user()->id == $post->user_id)
+						<a href="{{ route('posts.edit', [$post]) }}"><button class="btn btn-success">Edit Recipe</button></a>
+						<a href="#"><button class="btn btn-danger">Delete Recipe</button></a>
+					@endif
+				@endif
 			</div>
 			<div class="panel-body">
 				@if (!is_null($post->image))
