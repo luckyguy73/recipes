@@ -17,7 +17,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', function () {
     return view('home');
 });
-
+Route::post('/e/p', 'WebhookController@handle');
 
 
 
