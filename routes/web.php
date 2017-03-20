@@ -17,12 +17,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', function () {
     return view('home');
 });
-Route::get('/e/p', function () {
-    return view('parse');
-});
-Route::post('/e/p', function () {
-    return view('parse');
-});
+Route::post('/e/p', 'WebhookController@handle');
 
 
 
