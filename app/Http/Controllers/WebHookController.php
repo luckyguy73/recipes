@@ -15,6 +15,6 @@ class WebhookController extends Controller
         // if (method_exists($this, $method)) {
         //     $this->$method($payload);
         // }
-        return response('Email Received');
+        return response('Email Received', 200);
     }
 }
