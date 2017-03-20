@@ -20,6 +20,9 @@ Route::get('/', function () {
 Route::get('/e/p', function () {
     return view('parse');
 });
+Route::post('/e/p', function () {
+    return view('parse');
+});
 
 
 
