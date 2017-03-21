@@ -248,3 +248,10 @@ h6, .h6 {
     position: relative;
     top: -5px;
 }
+
+@media (max-width: 420px) {
+  #scroll-btn {
+    bottom: 3px;
+  }
+
+}

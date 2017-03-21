@@ -65,6 +65,14 @@ $(document).ready(function(){
         });
     });
     $('[data-toggle="message"]').tooltip();
+    //resize function to change class of recipe image on small screen
+    $(window).on('resize', function(){
+        var win = $(this);
+        if (win.width() < 350) { 
+            $('div.panel-body img.pull-right').addClass('img-responsive center-block')
+            .removeClass('pull-right');
+        }
+    });
 });
 /**
  * First we will load all of this project's JavaScript dependencies which
