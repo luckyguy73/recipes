@@ -18,6 +18,8 @@ Route::get('/', function () {
     return view('home');
 });
 Route::post('/e/p', 'WebhookController@handle');
+Route::post('post/like', 'LikeController@handlePost');
+Route::post('comment/like', 'LikeController@handleComment');
 
 
 

@@ -25,17 +25,35 @@
 				{!! nl2br(e($post->directions)) !!}
 			</div>
 			<div class="panel-footer">
-				<small class="text-success">{{ $post->created_at->diffForHumans() }} by <a href="#">{{ $post->user->name }}</a></small>
-				@if(count($post->tags))
-					<br>
-					<ul class="list-inline">
-					@foreach ($post->tags as $tag)
-						<li>
-							<a href="/posts/tags/{{ $tag->name }}"><small>{{ $tag->name }}</small> </a>
-						</li>
-					@endforeach
-					</ul>
-				@endif
+				<span class="text-success">
+				<ul class="list-unstyled" style="line-height: 2.75rem">
+					<li><a href="#"><b>{{ $post->user->name }}</b></a></li>
+					<li>
+						{{ $post->created_at->diffForHumans() }} ∙
+						<span class="badge{{ $post->isLikedBy(Auth::user()) ? 
+							' badge-liked' : ' badge-unliked' }}"> 
+							{{ count($post->likes) }} likes </span>
+						@if ($post->isLikedBy(Auth::user()))
+							∙ <span class="greencheck">&#9989;</span>
+						@else
+							∙ <img class="likeable-p" src="/images/like.png"
+							data-post="{{ $post->id }}">
+						@endif
+					</li>
+					<li>
+						@if(count($post->tags))
+							<ul class="list-inline">
+							@foreach ($post->tags as $tag)
+								<li>
+									<a href="/posts/tags/{{ $tag->name }}">{{ $tag->name }}
+									 </a>
+								</li>
+							@endforeach
+							</ul>
+						@endif
+					</li>
+				</ul>
+				</span>
 			</div>
 		</div>
 		<ul class="list-group">
@@ -55,8 +73,18 @@
 			
 			@foreach ($post->comments()->orderBy('created_at', 'desc')->get() as $c)
 				<li class="list-group-item">
-					<small class="text-danger">{{ $c->created_at->diffForHumans() }} by <a href="#">{{ $c->user->name }}</a></small> <br>
-					{!! nl2br(e($c->body)) !!}
+					<span class="text-success"><a href="#"><b>{{ $c->user->name }}</b></a></span> ∙ 
+					{!! nl2br(e($c->body)) !!} <br>
+					<span class="text-success">{{ $c->created_at->diffForHumans() }}
+					 ∙ <span class="badge{{ $c->isLikedBy(Auth::user()) ? ' badge-liked' 
+					 : ' badge-unliked' }}"> {{ count($c->likes) }} likes </span>
+					@if ($c->isLikedBy(Auth::user()))
+						∙ <span class="greencheck">&#9989;</span>
+					@else
+						∙ <img class="likeable-c" src="/images/like.png" 
+						data-comment="{{ $c->id }}">
+					@endif
+					</span>
 				</li>
 			@endforeach
 		</ul>

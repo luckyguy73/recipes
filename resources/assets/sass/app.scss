@@ -14,6 +14,36 @@
  * Globals
  */
 
+span.greencheck {
+  position: relative;
+  top: 3px;
+}
+
+.badge-liked {
+  background: limegreen;
+  font-family: courier;
+}
+
+.badge-unliked {
+  background: dodgerblue;
+  font-family: courier;
+}
+
+img.likeable-p, img.likeable-c {
+  height: 21px;
+  width: 21px;
+  position: relative;
+  bottom: 2px;
+  cursor: pointer;
+}
+
+img.likeable.el-liked {
+  opacity: 0.4;
+}
+img.likeable.el-not-liked {
+  opacity: 1;
+}
+
 body {
   font-family: Georgia, "Times New Roman", Times, serif;
   color: #555;

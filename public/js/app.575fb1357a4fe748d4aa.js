@@ -11215,6 +11215,38 @@ module.exports = g;
             }
         });
     });
+    $('img.likeable-p').on('click', function () {
+        $.ajax('/post/like', {
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            type: 'POST',
+            context: $(this),
+            data: { "post": $(this).data('post')
+            },
+            success: function success(response) {
+                $(this).prev().text(response + ' likes').css('background', 'limegreen');
+                $(this).after('<span class="greencheck">&#9989;</span>');
+                $(this).remove();
+            }
+        });
+    });
+    $('img.likeable-c').on('click', function () {
+        $.ajax('/comment/like', {
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            type: 'POST',
+            context: $(this),
+            data: { "comment": $(this).data('comment')
+            },
+            success: function success(response) {
+                $(this).prev().text(response + ' likes').css('background', 'limegreen');
+                $(this).after('<span class="greencheck">&#9989;</span>');
+                $(this).remove();
+            }
+        });
+    });
 });
 /**
  * First we will load all of this project's JavaScript dependencies which

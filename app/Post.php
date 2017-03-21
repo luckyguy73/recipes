@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
+    use Likeable;
+    
     protected $fillable = [
     	'title', 'ingredients', 'directions', 'slug', 'user_id', 'image'
     ];
@@ -47,4 +49,5 @@ class Post extends Model
     {
         return $this->belongsToMany(Tag::class);
     }
+
 }
