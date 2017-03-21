@@ -11248,6 +11248,7 @@ module.exports = g;
         });
     });
     $('[data-toggle="message"]').tooltip();
+    $('[data-toggle="user-liked"]').tooltip();
     //resize function to change class of recipe image on small screen
     $(window).on('resize', function () {
         var win = $(this);

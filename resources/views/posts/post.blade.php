@@ -19,7 +19,7 @@
 				<span class="badge{{ $post->isLikedBy(Auth::user()) ? ' badge-liked' :
 					 ' badge-unliked' }}"> {{ count($post->likes) }} likes </span>
 				@if ($post->isLikedBy(Auth::user()))
-					∙ <span class="greencheck">&#9989;</span>
+					∙ <span class="greencheck" data-toggle="user-liked" data-placement="right" title="You liked this 😍">&#9989;</span>
 				@else
 					∙ <img class="likeable-p" src="/images/like.png" data-post="{{ $post->id }}">
 				@endif
