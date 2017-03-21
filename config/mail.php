@@ -56,7 +56,7 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'support@belle-moda.gq'),
+        'address' => env('MAIL_FROM_ADDRESS', 'support@cs.belle-moda.gq'),
         'name' => env('MAIL_FROM_NAME', 'Belle Moda Support Team'),
     ],
 
