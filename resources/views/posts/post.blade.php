@@ -14,12 +14,19 @@
 		</span>
 		<span class="pull-left" style="clear: left;margin-top: 5px;">
 			{{ $post->created_at->diffForHumans() }} ∙
-			<span class="badge{{ $post->isLikedBy(Auth::user()) ? ' badge-liked' :
-				 ' badge-unliked' }}"> {{ count($post->likes) }} likes </span>
-			@if ($post->isLikedBy(Auth::user()))
-				∙ <span class="greencheck">&#9989;</span>
+			
+			@if(Auth::check())
+				<span class="badge{{ $post->isLikedBy(Auth::user()) ? ' badge-liked' :
+					 ' badge-unliked' }}"> {{ count($post->likes) }} likes </span>
+				@if ($post->isLikedBy(Auth::user()))
+					∙ <span class="greencheck">&#9989;</span>
+				@else
+					∙ <img class="likeable-p" src="/images/like.png" data-post="{{ $post->id }}">
+				@endif
 			@else
-				∙ <img class="likeable-p" src="/images/like.png" data-post="{{ $post->id }}">
+				<span class="badge" style="background: dodgerblue;"> {{ count($post->likes) }} likes </span>
+				∙ <img class="likeable-p" src="/images/like.png" style="opacity: 0.5"
+				data-toggle="message" data-placement="right" title="Please login to like this">
 			@endif
 			
 		</span>
@@ -32,10 +39,12 @@
 				</li>
 			@endforeach
 			</ul>
-		@elseif (Auth::user()->id == $post->user_id)
-			<span class="list-inline pull-left help-block" 
+		@elseif(Auth::check()) 
+			@if(Auth::user()->id == $post->user_id)
+				<span class="list-inline pull-left help-block" 
 				style="clear: left;margin-top: 5px;"><em> ∙ <a href="
-					{{ route('posts.show', [$post]) }}">Add a tag</a> ∙ </em></span>
+				{{ route('posts.show', [$post]) }}">Add a tag</a> ∙ </em></span>
+			@endif
 		@endif
 	</div>
 	</div><!-- /.blog-post -->

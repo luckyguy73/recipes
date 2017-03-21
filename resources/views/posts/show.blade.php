@@ -30,6 +30,8 @@
 					<li><a href="#"><b>{{ $post->user->name }}</b></a></li>
 					<li>
 						{{ $post->created_at->diffForHumans() }} ∙
+						
+					@if(Auth::check())
 						<span class="badge{{ $post->isLikedBy(Auth::user()) ? 
 							' badge-liked' : ' badge-unliked' }}"> 
 							{{ count($post->likes) }} likes </span>
@@ -39,6 +41,12 @@
 							∙ <img class="likeable-p" src="/images/like.png"
 							data-post="{{ $post->id }}">
 						@endif
+					@else
+						<span class="badge" style="background: dodgerblue;"> 
+							{{ count($post->likes) }} likes </span>
+						∙ <img class="likeable-p" src="/images/like.png" style="opacity: 0.5"data-toggle="message" data-placement="right" title="Please login to like this">
+					@endif
+
 					</li>
 					<li>
 						@if(count($post->tags))
@@ -76,6 +84,8 @@
 					<span class="text-success"><a href="#"><b>{{ $c->user->name }}</b></a></span> ∙ 
 					{!! nl2br(e($c->body)) !!} <br>
 					<span class="text-success">{{ $c->created_at->diffForHumans() }}
+
+				@if(Auth::check())
 					 ∙ <span class="badge{{ $c->isLikedBy(Auth::user()) ? ' badge-liked' 
 					 : ' badge-unliked' }}"> {{ count($c->likes) }} likes </span>
 					@if ($c->isLikedBy(Auth::user()))
@@ -84,6 +94,11 @@
 						∙ <img class="likeable-c" src="/images/like.png" 
 						data-comment="{{ $c->id }}">
 					@endif
+				@else
+					∙ <span class="badge" style="background: dodgerblue;"> {{ count($c->likes) }} likes </span>
+					∙ <img class="likeable-p" src="/images/like.png" style="opacity: 0.5"data-toggle="message" data-placement="right" title="Please login to like this">
+				@endif
+
 					</span>
 				</li>
 			@endforeach
