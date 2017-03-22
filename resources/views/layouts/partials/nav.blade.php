@@ -3,9 +3,8 @@
       <div class="container">
         <nav class="blog-nav">
         <a class="navbar-brand" href="#"><img id="bm-img" src="/favicon.ico" alt="belle moda"></a>
-          <a class="blog-nav-item" href="{{ url('/') }}">Home</a>
-          <a class="blog-nav-item" href="{{ route('posts.index') }} ">All Posts</a>
-          <a class="blog-nav-item" href="{{ route('posts.create') }} ">New Post</a>
+          <a class="blog-nav-item" href="{{ url('/') }}"><span class="glyphicon glyphicon-home"> HOME</span></a>
+          <a class="blog-nav-item" href="{{ route('posts.create') }} "><span class="glyphicon glyphicon-pencil"> CREATE</span></a>
           <form class="navbar-form navbar-right" action="/search" method="post">
             {{ csrf_field() }}
             <div class="form-group">
@@ -15,7 +14,7 @@
           </form>
             @if (Auth::check())
                 <span class="dropdown navbar-right">
-                  <a class="blog-nav-item navbar-right" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->name }} 
+                  <a class="blog-nav-item navbar-right" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> {{ Auth::user()->name }} 
                     <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <li>

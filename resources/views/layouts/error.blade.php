@@ -4,7 +4,7 @@
 <body>
     @include('layouts.partials.nav')
     <div class="container">
-        <div class="row">
+        <div class="row vertical-center">
             @yield('content')
         </div><!-- /.row -->
     </div><!-- /.container -->

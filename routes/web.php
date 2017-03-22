@@ -18,9 +18,6 @@ Route::get('/', 'PostController@index');
 Route::post('/e/p', 'WebhookController@handle');
 Route::post('post/like', 'LikeController@handlePost');
 Route::post('comment/like', 'LikeController@handleComment');
-Route::get('500', function () {
-    return view('errors.500');
-});
 
 
 

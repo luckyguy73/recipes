@@ -1,29 +1,62 @@
 @extends('layouts.master')
 
 @section('content')
-<div class="col-sm-8">
+<div class="col-sm-8 blog-main">
+	<h2 id="searchH2">Search results found "{{ count($posts) }}"</h2>
 	@foreach ($posts as $post)
-		<div class="blog-post panel panel-body">
-	
-			<h2 class="blog-post-title pull-left" style="clear: right;"><a href="{{ route('posts.show', [$post]) }}">{{ ucwords($post->title) }}</a></h2>
-			@if (!is_null($post->image))
-				<img src="{{ Storage::disk('s3')->url($post->image) }}" height="125" width="200" class="pull-right">
+	<div class="panel panel-default">
+
+		<h1 class="panel-heading text-center" style="clear: right;"><a href="{{ route('posts.show', [$post]) }}">{{ ucwords($post->title) }}</a></h1>
+		<div class="text-success panel-body">
+		@if (!is_null($post->image))
+			<img src="{{ Storage::disk('s3')->url($post->image) }}" height="125" width="200" class="pull-right">
+		@else
+			<img src="{{ url('/images/default.jpeg') }}" height="125" width="200" class="pull-right">
+		@endif
+						
+		<span class="pull-left user-popover" style="clear: left;margin-top: 10px;">
+			<a href="#" title="{{ $post->user->name }}" 
+				data-content="Recipes Posted: {{ count($post->user->posts) }}<br>Recipes Liked: {{ count($post->likedBy($post->user)->get()) }}<br>Comments Posted: 
+				{{ count($post->user->comments) }}<br>Comments Liked: 
+				{{ count(App\Comment::likedBy($post->user)->get()) }}">
+				<b>{{ $post->user->name }}</b></a>
+		</span>
+		<span class="pull-left" style="clear: left;margin-top: 5px;">
+			{{ $post->created_at->diffForHumans() }} ∙
+			
+			@if(Auth::check())
+				<span class="badge{{ $post->isLikedBy(Auth::user()) ? ' badge-liked' :
+					 ' badge-unliked' }}"> {{ count($post->likes) }} likes </span>
+				@if ($post->isLikedBy(Auth::user()))
+					∙ <span class="greencheck" data-toggle="user-liked" data-placement="right" title="You liked this 😍">&#9989;</span>
+				@else
+					∙ <img class="likeable-p" src="/images/like.png" data-post="{{ $post->id }}">
+				@endif
 			@else
-				<img src="{{ url('/images/default.jpeg') }}" height="125" width="200" class="pull-right">
+				<span class="badge" style="background: dodgerblue;"> {{ count($post->likes) }} likes </span>
+				∙ <img class="likeable-p" src="/images/like.png" style="opacity: 0.5"
+				data-toggle="message" data-placement="right" title="Please login to like this">
 			@endif
-			<p class="blog-post-meta pull-left" style="clear: left;"><span class="text-success">{{ $post->created_at->diffForHumans() }} by </span>
-				<a href="#">{{ $post->user->name }}</a></p>
-			@if(count($post->tags))
-				<ul class="list-inline pull-left" style="clear: left;">
-				@foreach ($post->tags as $tag)
-					<li>
-						<a href="/posts/tags/{{ $tag->name }}"><small>{{ $tag->name }}</small> </a>
-					</li>
-				@endforeach
-				</ul>
+			
+		</span>
+		@if(count($post->tags))
+			<ul class="list-inline pull-left" style="clear: left;margin-top: 5px;">
+			@foreach ($post->tags as $tag)
+				<li>
+					<a href="/posts/tags/{{ $tag->name }}">{{ $tag->name }}
+					 </a>
+				</li>
+			@endforeach
+			</ul>
+		@elseif(Auth::check()) 
+			@if(Auth::user()->id == $post->user_id)
+				<span class="list-inline pull-left help-block" 
+				style="clear: left;margin-top: 5px;"><em> ∙ <a href="
+				{{ route('posts.show', [$post]) }}">Add a tag</a> ∙ </em></span>
 			@endif
-	
-		</div><!-- /.blog-post -->
-	@endforeach
+		@endif
+	</div>
+	</div><!-- /.blog-post -->
+@endforeach
 </div>
 @stop

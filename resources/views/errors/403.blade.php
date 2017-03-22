@@ -1,6 +1,6 @@
 @extends('layouts.error')
 @section('content')
-	<div class="col-sm-8 col-sm-offset-2 vertical-center">
+	<div class="col-sm-8 col-sm-offset-2">
 		<div class="panel panel-default">
 			<div class="panel-heading text-center">
 				<h1>Whoops, something went wrong!</h1>

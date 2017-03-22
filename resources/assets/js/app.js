@@ -3,6 +3,13 @@ $(document).ready(function(){
     setTimeout(function(){
         $(".alert-dismissable").fadeOut("slow");
     }, 3000 );
+    $(window).scroll(function(event) {
+        if($(window).scrollTop() == 0){
+            $("#scroll-btn").fadeOut(150);
+        } else {
+            $("#scroll-btn").show();
+        }   
+    });
     $('#scroll-btn').click(function() {
     	$('body').scrollTop(0);
     });
