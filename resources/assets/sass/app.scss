@@ -256,3 +256,33 @@ h6, .h6 {
   }
 
 }
+
+/* Popover */
+  .popover {
+      border: 2px solid #428bca;
+  }
+  /* Popover Header */
+  .popover-title {
+      background-color: #f5f8fa; 
+      color: #3097d1; 
+      font-family: georgia;
+      font-size: 28px;
+      font-weight: bold;
+      text-align:center;
+      text-shadow: 1px 1px 1px black;
+  }
+  /* Popover Body */
+  .popover-content {
+      background-color: #428bca;
+      border: 1px dotted lightpink;
+      color: #f3fdff;
+      font-family: georgia;
+      font-size: 1.75rem;
+      font-weight: bold;
+      padding: 25px;
+      text-shadow: 1px 1px 1px black;
+  }
+  /* Popover Arrow */
+  .arrow {
+      border-right-color: #428bca !important;
+  }

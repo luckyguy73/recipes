@@ -27,7 +27,12 @@
 			<div class="panel-footer">
 				<span class="text-success">
 				<ul class="list-unstyled" style="line-height: 2.75rem">
-					<li><a href="#"><b>{{ $post->user->name }}</b></a></li>
+					<li class="user-popover"><a href="#" title="{{ $post->user->name }}" 
+				data-content="Recipes Posted: {{ count($post->user->posts) }}<br>Recipes Liked: {{ count($post->likedBy($post->user)->get()) }}<br>Comments Posted: 
+				{{ count($post->user->comments) }}<br>Comments Liked: 
+				{{ count(App\Comment::likedBy($post->user)->get()) }}">
+
+					<b>{{ $post->user->name }}</b></a></li>
 					<li>
 						{{ $post->created_at->diffForHumans() }} ∙
 						
@@ -81,7 +86,11 @@
 			
 			@foreach ($post->comments()->orderBy('created_at', 'desc')->get() as $c)
 				<li class="list-group-item">
-					<span class="text-success"><a href="#"><b>{{ $c->user->name }}</b></a></span> ∙ 
+					<span class="text-success user-popover"><a href="#" title="{{ $c->user->name }}" 
+				data-content="Recipes Posted: {{ count($c->user->posts) }}<br>Recipes Liked: {{ count($post->likedBy($c->user)->get()) }}<br>Comments Posted: 
+				{{ count($c->user->comments) }}<br>Comments Liked: 
+				{{ count(App\Comment::likedBy($c->user)->get()) }}">
+					<b>{{ $c->user->name }}</b></a></span> ∙ 
 					{!! nl2br(e($c->body)) !!} <br>
 					<span class="text-success">{{ $c->created_at->diffForHumans() }}
 

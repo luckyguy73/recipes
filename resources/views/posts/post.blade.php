@@ -9,8 +9,12 @@
 			<img src="{{ url('/images/default.jpeg') }}" height="125" width="200" class="pull-right">
 		@endif
 						
-		<span class="pull-left" style="clear: left;margin-top: 10px;">
-			<a href="#"><b>{{ $post->user->name }}</b></a>
+		<span class="pull-left user-popover" style="clear: left;margin-top: 10px;">
+			<a href="#" title="{{ $post->user->name }}" 
+				data-content="Recipes Posted: {{ count($post->user->posts) }}<br>Recipes Liked: {{ count($post->likedBy($post->user)->get()) }}<br>Comments Posted: 
+				{{ count($post->user->comments) }}<br>Comments Liked: 
+				{{ count(App\Comment::likedBy($post->user)->get()) }}">
+				<b>{{ $post->user->name }}</b></a>
 		</span>
 		<span class="pull-left" style="clear: left;margin-top: 5px;">
 			{{ $post->created_at->diffForHumans() }} ∙

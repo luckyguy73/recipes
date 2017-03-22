@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Alert;
 use App\Post;
+use App\Comment;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
-use Alert;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Storage;
 
@@ -24,7 +25,8 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::latest()->filter(request(['month', 'year']))->paginate(10);
-        return view('posts.index', compact('posts'));
+        $comments = Comment::all();
+        return view('posts.index', compact('posts', 'comments'));
     }
 
     /**

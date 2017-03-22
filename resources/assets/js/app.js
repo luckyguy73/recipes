@@ -66,6 +66,14 @@ $(document).ready(function(){
     });
     $('[data-toggle="message"]').tooltip();
     $('[data-toggle="user-liked"]').tooltip();
+    //user-popovers
+    $('.user-popover a').popover({
+        html: true,
+        animation: true,
+        placement: "right",
+        trigger: "hover"
+    });
+
     //resize function to change class of recipe image on small screen
     $(window).on('resize', function(){
         var win = $(this);
