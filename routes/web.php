@@ -13,13 +13,14 @@ Route::post('search', function (Request $request) {
 });
 Route::post('posts/{post}/comments', 'CommentController@store');
 Route::get('posts/tags/{tag}', 'TagController@index');
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/home', 'PostController@index')->name('home');
+Route::get('/', 'PostController@index');
 Route::post('/e/p', 'WebhookController@handle');
 Route::post('post/like', 'LikeController@handlePost');
 Route::post('comment/like', 'LikeController@handleComment');
+Route::get('500', function () {
+    return view('errors.500');
+});
 
 
 
