@@ -11233,7 +11233,7 @@ module.exports = g;
             },
             success: function success(response) {
                 $(this).prev().text(response + ' likes').css('background', 'limegreen');
-                $(this).after('<span class="greencheck">&#9989;</span>');
+                $(this).after('<span class="greencheck" data-toggle="user-liked" data-placement="right" title="You liked this 😍">&#9989;</span>');
                 $(this).remove();
             }
         });
@@ -11249,7 +11249,7 @@ module.exports = g;
             },
             success: function success(response) {
                 $(this).prev().text(response + ' likes').css('background', 'limegreen');
-                $(this).after('<span class="greencheck">&#9989;</span>');
+                $(this).after('<span class="greencheck" data-toggle="user-liked" data-placement="right" title="You liked this 😍">&#9989;</span>');
                 $(this).remove();
             }
         });

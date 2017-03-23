@@ -36,6 +36,12 @@ img.likeable-p, img.likeable-c {
   bottom: 2px;
   cursor: pointer;
 }
+
+img.likeable-p:hover, img.likeable-c:hover {
+  height: 28px;
+  width: 28px;
+}
+
 html {
   background: #3a3f44;
 }
@@ -49,6 +55,7 @@ html {
   border-color: #3a3f44;
   cursor: pointer;
 }
+
 body {
   background: linear-gradient( 135deg, #272b30, #777 60%, #272b30);
   color: #c8c8c8;
@@ -200,7 +207,7 @@ label {
 
 .blog-main {
   font-size: 18px;
-  line-height: 1.5;
+  line-height: 1.9;
 }
 
 /* Sidebar modules for boxing content */
@@ -280,6 +287,7 @@ label {
   z-index: 1000;
   opacity: 0.4;
   display: none;
+  border-radius: 45px;
 }
 #scroll-btn:hover, #scroll-btn:focus {
   opacity: 1;

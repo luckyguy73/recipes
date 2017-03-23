@@ -50,7 +50,7 @@ $(document).ready(function(){
             },
             success: function(response) {
                 $(this).prev().text(response + ' likes').css('background', 'limegreen');
-                $(this).after('<span class="greencheck">&#9989;</span>');
+                $(this).after('<span class="greencheck" data-toggle="user-liked" data-placement="right" title="You liked this 😍">&#9989;</span>');
                 $(this).remove();
             }
         });
@@ -66,7 +66,7 @@ $(document).ready(function(){
             },
             success: function(response) {
                 $(this).prev().text(response + ' likes').css('background', 'limegreen');
-                $(this).after('<span class="greencheck">&#9989;</span>');
+                $(this).after('<span class="greencheck" data-toggle="user-liked" data-placement="right" title="You liked this 😍">&#9989;</span>');
                 $(this).remove();
             }
         });
