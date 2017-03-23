@@ -45,6 +45,11 @@ img.likeable-p:hover, img.likeable-c:hover {
 html {
   background: #3a3f44;
 }
+
+.has-error .control-label {
+  text-shadow: 2px 2px 4px #000000;
+  font-size: 2rem;
+}
 .btn:focus, .btn:active:focus, .btn.active:focus {
     outline: 0 none;
 }
