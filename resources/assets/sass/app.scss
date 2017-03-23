@@ -45,6 +45,10 @@ img.likeable-p:hover, img.likeable-c:hover {
 html {
   background: #3a3f44;
 }
+.btn:focus, .btn:active:focus, .btn.active:focus {
+    outline: 0 none;
+}
+
 .btn-primary {
   background: linear-gradient( 0deg, #272b30, #3a3f44 50%, #272b30);
   border-color: #3a3f44;
