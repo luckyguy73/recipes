@@ -3,13 +3,13 @@ $(document).ready(function(){
     setTimeout(function(){
         $(".alert-dismissable").fadeOut("slow");
     }, 3000 );
-    $(window).scroll(function(event) {
+    $(window).scroll(_.debounce(function() {
         if($(window).scrollTop() == 0){
             $("#scroll-btn").fadeOut(150);
         } else {
             $("#scroll-btn").show();
         }   
-    });
+    } ,100));
     $('#scroll-btn').click(function() {
     	$('body').scrollTop(0);
     });
