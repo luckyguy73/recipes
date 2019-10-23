@@ -35,8 +35,11 @@ class Post extends Model
             $query->whereMonth('created_at', Carbon::parse($filters['month'])->month);
         }
         
-        if($year = $filters['year']) {
-            $query->whereYear('created_at', $year);
+        // if($year = $filters['year']) {
+        //     $query->whereYear('created_at', $year);
+        // }
+        if (isset($filters['year'])) {
+            $query->whereYear('created_at', $filters['year']);
         }
     }
     public static function archives()
