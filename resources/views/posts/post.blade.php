@@ -8,7 +8,7 @@
 		@else
 			<img src="{{ url('/images/default.jpeg') }}" height="125" width="200" class="pull-right">
 		@endif
-						
+	
 		<span class="pull-left user-popover" style="clear: left;margin-top: 10px;">
 			<a href="#" title="{{ $post->user->name }}" 
 				data-content="Recipes Posted: {{ count($post->user->posts) }}<br>Recipes Liked: {{ count($post->likedBy($post->user)->get()) }}<br>Comments Posted: 
