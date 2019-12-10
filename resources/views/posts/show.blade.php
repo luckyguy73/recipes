@@ -14,7 +14,7 @@
 			</div>
 			<div class="panel-body">
 				@if (!is_null($post->image))
-					<img src="{{ Storage::disk('s3')->url($post->image) }}" class="img-responsive center-block">
+					<img src="https://drive.google.com/uc?export=view&id={{ collect(Storage::disk('google')->getAdapter()->listContents(''))->where('name', '=', $post->image)->first()['path'] }}" class="img-responsive center-block">
 				@endif
 				<br>
 				<h3>Ingredients</h3>

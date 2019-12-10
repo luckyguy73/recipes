@@ -55,7 +55,9 @@ class PostController extends Controller
             'directions' => 'required',
             'image' => 'file|max:40000|mimes:jpeg,gif,png,svg,bmp',
         ]);
-        $path = empty(request('image')) ? null : $request->file('image')->store(auth()->id(), 's3');
+
+        $path = empty(request('image')) ? null : $request->file('image')->store(null, 'google');
+
         Post::create([
             'title' => request('title'),
             'ingredients' => request('ingredients'),
@@ -115,10 +117,11 @@ class PostController extends Controller
         ]);
         if (!empty(request('image'))) {
             if(!is_null($post->image)) {
-                $file = $post->image;
-                Storage::disk('s3')->delete($file);
+                $file = collect(Storage::disk('google')->getAdapter()->listContents(''))
+                    ->where('name', '=', $post->image)->first();
+                Storage::disk('google')->delete($file['path']);
             }
-            $path = $request->file('image')->store(auth()->id(), 's3');
+            $path = $request->file('image')->store(null, 'google');
             $post->image = $path;
         }
             $post->title = request('title');

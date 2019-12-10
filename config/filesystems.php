@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'cloud' => 's3',
+    'cloud' => 'google',
 
     /*
     |--------------------------------------------------------------------------
@@ -62,6 +62,16 @@ return [
             'region' => env('AWS_REGION'),
             'bucket' => env('AWS_BUCKET'),
             'visibility' => 'public',
+        ],
+
+        'google' => [
+            'driver' => 'google',
+            'clientId' => env('GOOGLE_DRIVE_CLIENT_ID'),
+            'clientSecret' => env('GOOGLE_DRIVE_CLIENT_SECRET'),
+            'refreshToken' => env('GOOGLE_DRIVE_REFRESH_TOKEN'),
+            'folderId' => env('GOOGLE_DRIVE_FOLDER_ID'),
+            'visibility' => 'public',
+            // 'teamDriveId' => env('GOOGLE_DRIVE_TEAM_DRIVE_ID'),
         ],
 
     ],

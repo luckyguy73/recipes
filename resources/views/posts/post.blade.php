@@ -4,7 +4,7 @@
 		<h1 class="panel-heading text-center" style="clear: right;"><a href="{{ route('posts.show', [$post]) }}">{{ ucwords($post->title) }}</a></h1>
 		<div class="text-success panel-body">
 		@if (!is_null($post->image))
-			<img src="{{ Storage::disk('s3')->url($post->image) }}" height="125" width="200" class="pull-right">
+			<img src="https://drive.google.com/uc?export=view&id={{ collect(Storage::disk('google')->getAdapter()->listContents(''))->where('name', '=', $post->image)->first()['path'] }}" height="125" width="200" class="pull-right">
 		@else
 			<img src="{{ url('/images/default.jpeg') }}" height="125" width="200" class="pull-right">
 		@endif
